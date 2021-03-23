@@ -1,7 +1,7 @@
 const envConfig = require('./app/config/env');
 const ENV = envConfig.getNormalizedEnv();
 
-const PORT = 3000;
+const PORT = 3001;
 
 const express = require("express");
 const helmet = require('helmet');
