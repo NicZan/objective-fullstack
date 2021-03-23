@@ -1,6 +1,7 @@
 import apiConfig from '../config/api.js';
 import axios from 'axios';
 
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {
     start() {
         return axios({
