@@ -1,0 +1,43 @@
+@import "../../styles/variables.scss";
+
+.container {
+  position: relative;
+  width: fit-content;
+}
+
+.input {
+  width: 295px;
+  height: 32px;
+  box-sizing: border-box;
+  padding: 4px 16px;
+  border-radius: 4px;
+  font-style: italic;
+  font-size: 14px;
+  line-height: 19px;
+  font-weight: 400;
+  color: #444;
+  background-color: rgba(239, 239, 239, 0.5);
+  border: 1px solid #E5E5E5;
+}
+
+.inputSearch {
+  padding: 4px 38px 4px 16px;
+}
+
+.search {
+  height: 16px;
+  width: 16px;
+  position: absolute;
+  top: 8px;
+  right: 16px;
+}
+
+@media (max-width: 767px) {
+  .container {
+    width: 100%;
+  }
+
+  .input {
+    width: 100%;
+  }
+}
