@@ -18,14 +18,14 @@ router.get("/start", asyncMiddleware(async (req, res) => {
     });
 }));
 
-router.get("/end", asyncMiddleware(async (req, res) => {
+// router.get("/end", asyncMiddleware(async (req, res) => {
 
-    res.json({
-        success: true,
-        message: "Conversa encerrada",
-        result: questions.getEndTalk()
-    });
-}));
+//     res.json({
+//         success: true,
+//         message: "Conversa encerrada",
+//         result: questions.getEndTalk()
+//     });
+// }));
 
 router.post("/next/question", asyncMiddleware(async (req, res) => {
     const sequence = req.body.sequence;
