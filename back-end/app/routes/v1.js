@@ -35,13 +35,14 @@ router.post("/next/question", asyncMiddleware(async (req, res) => {
         { params: { sequence, isOver } },
     ]);
 
-    let {result, finish} = await questionService.getQuestion(sequence, isOver);
+    let {result, finish, food} = await questionService.getQuestion(sequence, isOver);
 
     res.json({
         success: true,
         message: "Próxima pergunta buscada.",
         finish,
-        result
+        result,
+        food
     });
 }));
 

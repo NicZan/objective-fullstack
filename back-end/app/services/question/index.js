@@ -3,6 +3,8 @@ const answers = require("../../config/answers");
 
 exports.getQuestion = async (sequence, isOver) => {
 
+    let antQuestion; 
+
     //Final da Arvore esquerda representa que encontrou a resposta, direita adiciona uma nova folha
     if (isOver && sequence[sequence.length - 1] === "left") {
         return {
@@ -21,20 +23,32 @@ exports.getQuestion = async (sequence, isOver) => {
 
     //Navegando pela arvore de acordo com as respostar do usuário
     for (let value of sequence) {
+        if (question[0][value].length !== 0)
+            antQuestion = question[0];
 
         if (question[0][value].length === 0 && value === "left") {
             return {
                 result: questions.getPositiveQuestion() + " " + question[0]['food'] + "?",
-                finish: true
+                finish: true,
+                food: question[0]['food'],
             }
         }
         if (question[0][value].length === 0 && value === "right") {
-            return {
-                result: questions.getNegativeQuestion(),
-                finish: true
+            if (!isOver) {
+                return {
+                    result: questions.getPositiveQuestion() + " " + antQuestion['food'] + "?",
+                    finish: true,
+                    food: antQuestion['food'],
+                }
+            } else {
+                return {
+                    result: questions.getNegativeQuestion(),
+                    finish: true
+                }
             }
         }
 
+        
         question = question[0][value];
     }
 
@@ -42,7 +56,8 @@ exports.getQuestion = async (sequence, isOver) => {
     if (!question[0]['feature']) {
         return {
             result: questions.getPositiveQuestion() + " " + question[0]['food'] + "?",
-            finish: true
+            finish: true, 
+            food: question[0]['food'],
         }
     } else {
         return {
@@ -54,7 +69,6 @@ exports.getQuestion = async (sequence, isOver) => {
 };
 
 exports.postQuestion = async (feature, food, sequence) => {
-
     let reference = answers;
     let lastAnswer;
     
@@ -66,11 +80,13 @@ exports.postQuestion = async (feature, food, sequence) => {
         }
     }
 
+    let updatedAnswers = answers;
+
     for(let value of sequence){
-        reference = reference[0][value];
+        updatedAnswers = updatedAnswers[0][value];
     }
 
-    reference.push({ feature: feature, food: food, left: [], right: [lastAnswer] });
+    updatedAnswers.push({ feature: feature, food: food, left: [], right: lastAnswer ? [lastAnswer] : [] });
 
     return answers;
 };
