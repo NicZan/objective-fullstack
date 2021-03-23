@@ -4,7 +4,8 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "node --max-http-header-size=80000 server.js"
+    "start": "node server.js",
+    "test": "mocha 'test' -t 25000 --bail --exit"
   },
   "repository": {
     "type": "git",
@@ -21,14 +22,9 @@
     "passport-jwt": "^4.0.0"
   },
   "devDependencies": {
+    "chai": "^4.3.4",
+    "chai-http": "^4.3.0",
+    "mocha": "^8.3.2",
     "nodemon": "^2.0.6"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npx lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.{js,jsx,ts,tsx}": "npm run inspect:lint"
   }
 }
