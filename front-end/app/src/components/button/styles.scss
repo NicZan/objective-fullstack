@@ -1,0 +1,71 @@
+@import "../../styles/variables.scss";
+
+.main-button{
+  width: 100%;
+  margin-left: 20px;
+  margin-top: 20px;
+  min-height: 38px;
+  padding: 8px ;
+  font-size: 14px;
+  max-width: 75px;
+  height: fit-content;
+  box-sizing: border-box;
+  background-color: $primary-color;
+  color: #fff;
+  position: relative;
+  border-radius: 40px;
+  border: none;
+  font-weight: bold;
+  font-size: 14px;
+  opacity: 1;
+  cursor: pointer;
+  &:hover{
+    opacity: 0.8;
+  }
+  &.disabled{
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  &.negative{
+    color: $primary-color;
+    background-color: #fff;
+  }
+  &#contact-button{
+    min-width: 180px;
+    min-height: 48px;
+    padding: 12px 38px;
+  }
+  &.outlined{
+    background-color: white;
+    color: $primary-color;
+    border: 1px solid $primary-color;
+    padding: 8px 28px !important;
+  }
+  &.small{
+    min-height: 40px;
+    padding: 8px 24px;
+    font-size: 14px;
+  }
+  &.medium{
+    min-height: 48px;
+    padding: 12px 28px;
+    font-size: 16px;
+    font-weight: 600;
+  }
+  &.no-padding{
+    padding: 0;
+  }
+  &.icon{
+    font-size: 16px;
+    font-weight: 400;
+    // @supports (display: grid) {
+    //     display: grid;
+    //     grid-template-columns: 1fr auto;
+    //     align-content: center;
+    //   }
+
+    //   @supports not (display: grid) {
+    //      // Safari/IE style
+    //   }
+  }
+}
