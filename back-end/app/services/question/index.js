@@ -59,18 +59,12 @@ exports.postQuestion = async (feature, food, sequence) => {
     let lastAnswer;
     
     for (let i = 0; i < sequence.length; i++) {
-        if(i === sequence.length -1){
-            lastAnswer = reference[0][sequence[i]].pop();
-        }else{
-            reference = reference[0][sequence[i]];
-        }
+        i === sequence.length - 1 ?
+            lastAnswer = reference[0][sequence[i]].pop() : reference = reference[0][sequence[i]];
     }
 
     let updatedAnswers = answers;
-
-    for(let value of sequence){
-        updatedAnswers = updatedAnswers[0][value];
-    }
+    sequence.map(value => {updatedAnswers = updatedAnswers[0][value]});
 
     updatedAnswers.push({ feature: feature, food: food, left: [], right: lastAnswer ? [lastAnswer] : [] });
 
