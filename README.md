@@ -25,6 +25,6 @@ Open [http://localhost:3000](http://localhost:3000) to open browser.
 
 
 ## Back-end test Scripts
-navigate to the folder back-end and execute
+navigate to the folder back-end and execute on windows `cd .\back-end\` then
 
-`npm test`
+`npm install` and `npm test`
