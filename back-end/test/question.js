@@ -7,7 +7,7 @@ const expect = chai.expect;
 
 let server = require('../server.js');
 
-describe('test if food lasanha', function() {
+describe('test if food "lasanha"', function() {
 
     it('should get start conversation', function (done) {
         chai.request(server)
@@ -79,7 +79,7 @@ describe('test if food lasanha', function() {
     });
 });
 
-describe('test if food bolo de chocolate', function() {
+describe('test if food "bolo de chocolate"', function() {
 
     it('should get start conversation', function (done) {
         chai.request(server)
@@ -151,7 +151,7 @@ describe('test if food bolo de chocolate', function() {
     });
 });
 
-describe('add new food if not bolo de chocolate', function() {
+describe('add new food if not "bolo de chocolate"', function() {
 
     it('should get start conversation', function (done) {
         chai.request(server)
@@ -237,7 +237,7 @@ describe('add new food if not bolo de chocolate', function() {
     });
 });
 
-describe('test if food leite', function() {
+describe('test if food "leite"', function() {
 
     it('should get start conversation', function (done) {
         chai.request(server)
@@ -327,7 +327,7 @@ describe('test if food leite', function() {
     });
 });
 
-describe('add new food if not lasanha', function() {
+describe('add new food if not "lasanha"', function() {
 
     it('should get start conversation', function (done) {
         chai.request(server)
@@ -413,7 +413,7 @@ describe('add new food if not lasanha', function() {
     });
 });
 
-describe('test if food pão', function() {
+describe('test if food "pão"', function() {
 
     it('should get start conversation', function (done) {
         chai.request(server)

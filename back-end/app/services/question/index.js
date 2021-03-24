@@ -47,7 +47,6 @@ exports.getQuestion = async (sequence, isOver) => {
                 }
             }
         }
-
         
         question = question[0][value];
     }
