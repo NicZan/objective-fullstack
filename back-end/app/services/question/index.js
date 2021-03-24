@@ -23,21 +23,19 @@ exports.getQuestion = async (sequence, isOver) => {
         if (question[0][value].length !== 0)
             antQuestion = question[0];
 
-        if (question[0][value].length === 0 && value === "left") {
-            return {
+        if(question[0][value].length === 0){
+           return value === "left" ? {
                 result: questions.getPositiveQuestion() + " " + question[0]['food'] + "?",
                 finish: true,
                 food: question[0]['food'],
-            }
-        } else if (question[0][value].length === 0 && value === "right") {
-           return !isOver ? {
+            } : !isOver ? {
                 result: questions.getPositiveQuestion() + " " + antQuestion['food'] + "?",
                 finish: true,
                 food: antQuestion['food'],
             } : {
                 result: questions.getNegativeQuestion(),
                 finish: true
-            }
+            };
         }
         
         question = question[0][value];
