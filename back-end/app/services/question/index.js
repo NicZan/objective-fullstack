@@ -6,18 +6,15 @@ exports.getQuestion = async (sequence, isOver) => {
     let antQuestion; 
 
     //Final da Arvore esquerda representa que encontrou a resposta, direita adiciona uma nova folha
-    if (isOver && sequence[sequence.length - 1] === "left") {
-        return {
+    if(isOver){
+        return sequence[sequence.length - 1] === "left" ?{
             result: questions.getEndTalk(),
             finish: true
-        }
-    }
-    if (isOver && sequence[sequence.length - 1] === "right") {
-        return {
+        } : {
             result: questions.getNegativeQuestion(),
             finish: true
         }
-    }
+    }  
 
     let question = answers;
 
@@ -32,19 +29,14 @@ exports.getQuestion = async (sequence, isOver) => {
                 finish: true,
                 food: question[0]['food'],
             }
-        }
-        if (question[0][value].length === 0 && value === "right") {
-            if (!isOver) {
-                return {
-                    result: questions.getPositiveQuestion() + " " + antQuestion['food'] + "?",
-                    finish: true,
-                    food: antQuestion['food'],
-                }
-            } else {
-                return {
-                    result: questions.getNegativeQuestion(),
-                    finish: true
-                }
+        } else if (question[0][value].length === 0 && value === "right") {
+           return !isOver ? {
+                result: questions.getPositiveQuestion() + " " + antQuestion['food'] + "?",
+                finish: true,
+                food: antQuestion['food'],
+            } : {
+                result: questions.getNegativeQuestion(),
+                finish: true
             }
         }
         
@@ -52,19 +44,16 @@ exports.getQuestion = async (sequence, isOver) => {
     }
 
     //retorna uma nova pergunta para o usuário
-    if (!question[0]['feature']) {
-        return {
-            result: questions.getPositiveQuestion() + " " + question[0]['food'] + "?",
+    return !question[0]['feature'] ? {
+        result: questions.getPositiveQuestion() + " " + question[0]['food'] + "?",
+        finish: true, 
             finish: true, 
-            food: question[0]['food'],
-        }
-    } else {
-        return {
-            result: questions.getPositiveQuestion() + " " + question[0]['feature'] + "?",
-            finish: false
-        }
-    }
-
+        finish: true, 
+        food: question[0]['food'],
+    } : {
+        result: questions.getPositiveQuestion() + " " + question[0]['feature'] + "?",
+        finish: false
+    };
 };
 
 exports.postQuestion = async (feature, food, sequence) => {
