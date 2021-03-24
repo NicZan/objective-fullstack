@@ -1,0 +1,26 @@
+@import "../../styles/variables.scss";
+
+.mainButton{
+  width: 100%;
+  min-width: 75px;
+  padding: 8px ;
+  font-size: 14px;
+  height: fit-content;
+  box-sizing: border-box;
+  background-color: $primary-color;
+  color: white;
+  position: relative;
+  border-radius: 40px;
+  border: none;
+  font-weight: bold;
+  font-size: 14px;
+  opacity: 1;
+  cursor: pointer;
+  &:hover{
+    opacity: 0.8;
+  }
+  &:disabled{
+    opacity: 1;
+    background-color: $light-blue;
+  }
+}

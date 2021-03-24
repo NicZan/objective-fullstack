@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react"
 import questionsResource from "../../resources/questions";
 import Button from "../../components/button";
 import Input from "../../components/input";
+import styles from "./styles.module.scss";
 
-const Main = (props) => {
+const Main = () => {
     const [initialDialog, setInitialDialog] = useState("");
     const [dialog, setDialog] = useState("");
     const [sequence, setSequence] = useState([]);
@@ -35,6 +36,14 @@ const Main = (props) => {
         setDialog(response.data.result);
         setInitialDialog(response.data.result);
     }, []);
+
+    const handleUpdateFood = (event) => {
+        setFood(event.target.value);
+    };
+
+    const handleUpdateFeature = (event) => {
+        setFeature(event.target.value);
+    };
 
     const getNextQuestion = async (direction) => {
 
@@ -75,14 +84,6 @@ const Main = (props) => {
         }
     }
 
-    const handleUpdateFood = (event) => {
-        setFood(event.target.value);
-    };
-
-    const handleUpdateFeature = (event) => {
-        setFeature(event.target.value);
-    };
-
     const putNewQuestion = async () => {
         try {
             if (loading) {
@@ -108,76 +109,82 @@ const Main = (props) => {
     }
 
     return (
-        <div style={{margin: "40px 40px", border: "1px solid #e7e7e7", borderLeft: '3px solid #3E81D3', borderRadius: 20, padding: 20, marginBottom: 20, maxWidth: 300, alignContent: 'center' }}>
-            <h1>Jogo Gourmet</h1>
-            <p>{dialog}</p>
-            {!start && <Button
-                onClick={() => { isOver ? clearState() : getNextQuestion(sequence) }}
-                className={`confirm`}
-            >
-                {'ok'}
-            </Button>}
-
-            {start && !hasToAddNewQuestion && <div>
-                <Button
-                    onClick={() => { getNextQuestion("left") }}
-                    className={`left`}
-                >
-                    {'sim'}
-                </Button>
-                <Button
-                    onClick={() => { getNextQuestion("right") }}
-                    className={`right`}
-                >
-                    {'não'}
-                </Button>
-            </div>}
-
-            {hasToAddNewQuestion && !showFeature && <div>
-                <Input
-                    placeholder={""}
-                    onChange={handleUpdateFood}
-                />
-
-                <div>
+        <div className={styles.container}>
+            <div className={styles.box}>
+                <h1 className={styles.title}>Jogo Gourmet</h1>
+                <p  className={styles.text}>{dialog}</p>
+                {!start && <div className={styles.containerButton}>
                     <Button
-                        onClick={() => {
-                            setDialog(food + " é ______ mas " + lastFood + " não.");
-                            setShowFeature(true)
-                        }}
-                        className={`setFood`}
+                        onClick={() => { isOver ? clearState() : getNextQuestion(sequence) }}
+                        className={`confirm`}
                     >
                         {'ok'}
-                    </Button>
-                    <Button
-                        onClick={() => { clearState() }}
-                        className={`cancel`}
-                    >
-                        {'cancelar'}
-                    </Button>
-                </div>
-            </div>}
-            {hasToAddNewQuestion && showFeature && <div>
-                <Input
-                    placeholder={""}
-                    onChange={handleUpdateFeature}
-                />
+                    </Button></div>
+                }
 
-                <div>
+                {start && !hasToAddNewQuestion && <div className={styles.containerButton}>
                     <Button
-                        onClick={() => { putNewQuestion() }}
-                        className={`createNewQuestion`}
+                        onClick={() => { getNextQuestion("left") }}
+                        className={`left`}
                     >
-                        {'ok'}
+                        {'sim'}
                     </Button>
                     <Button
-                        onClick={() => { clearState() }}
-                        className={`cancel`}
+                        onClick={() => { getNextQuestion("right") }}
+                        className={`right`}
                     >
-                        {'cancelar'}
+                        {'não'}
                     </Button>
-                </div>
-            </div>}
+                </div>}
+
+                {hasToAddNewQuestion && !showFeature && <div>
+                    <Input
+                        placeholder={""}
+                        onChange={handleUpdateFood}
+                    />
+
+                    <div className={styles.containerButton}>
+                        <Button
+                            disabled={!food}
+                            onClick={() => {
+                                setDialog(food + " é ______ mas " + lastFood + " não.");
+                                setShowFeature(true)
+                            }}
+                            className={`setFood`}
+                        >
+                            {'ok'}
+                        </Button>
+                        <Button
+                            onClick={() => { clearState() }}
+                            className={`cancel`}
+                        >
+                            {'cancelar'}
+                        </Button>
+                    </div>
+                </div>}
+                {hasToAddNewQuestion && showFeature && <div>
+                    <Input
+                        placeholder={""}
+                        onChange={handleUpdateFeature}
+                    />
+
+                    <div className={styles.containerButton}>
+                        <Button
+                            disabled={!feature}
+                            onClick={() => { putNewQuestion() }}
+                            className={`createNewQuestion`}
+                        >
+                            {'ok'}
+                        </Button>
+                        <Button
+                            onClick={() => { clearState() }}
+                            className={`cancel`}
+                        >
+                            {'cancelar'}
+                        </Button>
+                    </div>
+                </div>}
+            </div>
         </div>
     )
 }

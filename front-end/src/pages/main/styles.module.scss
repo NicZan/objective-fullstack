@@ -1,0 +1,39 @@
+@import "../../styles/variables.scss";
+
+.container{
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    align-content: center;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.box{
+    display: grid;
+    grid-gap: 16px;
+    -webkit-box-shadow: -3px 1px 10px 2px $black; 
+    box-shadow: -3px 1px 10px 2px $black;
+    border-radius: 20px;
+    padding: 20px;
+    min-width: 300px;
+    text-align: center;
+}
+
+.containerButton{
+    display: grid;
+    grid-gap: 14px;
+    justify-content: center;
+    grid-auto-flow: column;
+}
+
+.title{
+    font-size: 24px;
+    margin: 0;
+}
+
+.text{
+    font-size: 16px;
+    margin: 0;
+}
