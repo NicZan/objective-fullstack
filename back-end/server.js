@@ -8,11 +8,9 @@ const helmet = require('helmet');
 const app = express();
 app.use(helmet());
 
-const path = require('path');
 const bodyParser = require("body-parser");
 
 let apiV1Routes = require("./app/routes/v1");
-let auth = require("./app/services/auth")();
 let server = require('http').createServer(app);
 
 app.use(bodyParser.json());
@@ -23,8 +21,6 @@ app.use(function(req, res, next) {
     res.setHeader("Access-Control-Allow-Headers", 'Origin, Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With');
     next();
 });
-
-app.use(auth.initialize());
 
 app.get('/', function(req, res){
     res.json("Objective API.");
